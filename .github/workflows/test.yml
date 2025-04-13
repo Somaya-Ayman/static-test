@@ -19,5 +19,5 @@ jobs:
         mkdir -p backend/config
         echo "${{ secrets.PLATFORM }}" > backend/config/.env
 
-    - name: Show contents of .env file (for testing only - remove later)
+    - name: Show  of .env file (for testing only - remove later)
       run: cat backend/config/.env
