@@ -16,7 +16,7 @@ jobs:
     - name: Create folder and write .env file
       run: |
         mkdir -p backend/config
-        echo "${{ secrets.ENV_FILE }}" > backend/config/.env
+        echo "${{ secrets.PLATFORM }}" > backend/config/.env
 
     - name: Show contents of .env file (for testing only - remove later)
       run: cat backend/config/.env
