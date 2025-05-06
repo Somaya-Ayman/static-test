@@ -1,16 +1,12 @@
 name: Use .env from GitHub Secrets
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    workflow_dispatch:
-      inputs:
-        target_branch:
-          description: "Choose branch"
-          required: true
-          default: "main" 
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: "Choose branch"
+        required: true
+        default: "main" 
 
 jobs:
   build:
