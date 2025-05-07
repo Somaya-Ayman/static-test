@@ -2,15 +2,6 @@ name: Use .env from GitHub Secrets
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Select the branch to deploy'
-        required: true
-        type: choice
-        options:
-          - main
-          - dev
-          - feature
 
 jobs:
   build:
