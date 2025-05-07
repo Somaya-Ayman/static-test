@@ -2,6 +2,15 @@ name: Use .env from GitHub Secrets
 
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Select the branch to deploy'
+        required: true
+        type: choice
+        options:
+          - main
+          - dev
+          - feature
 
 jobs:
   build:
@@ -22,5 +31,8 @@ jobs:
         mkdir -p backend/config
         echo "BRANCH_NAME=${{ env.BRANCH_NAME }}" > backend/config/.env
 
-    - name: Show .env file (for testing only - remove later)
-      run: cat backend/config/.env
+    - name: Show .env file and print branch name
+      run: |
+        echo "Branch selected: $BRANCH_NAME"
+        echo "Contents of .env file:"
+        cat backend/config/.env
