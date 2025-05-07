@@ -2,28 +2,19 @@ name: Use .env from GitHub Secrets
 
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch name'
+        required: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      BRANCH_NAME: ${{ github.event.inputs.branch }}
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.inputs.branch }}
-
-    - name: Save branch name as an environment variable
-      run: |
-        echo "BRANCH_NAME=${{ github.event.inputs.branch }}" >> $GITHUB_ENV
-
-    - name: Create folder and write .env file
-      run: |
-        mkdir -p backend/config
-        echo "BRANCH_NAME=${{ env.BRANCH_NAME }}" > backend/config/.env
-
-    - name: Show .env file and print branch name
+    - name: Print branch name
       run: |
         echo "Branch selected: $BRANCH_NAME"
-        echo "Contents of .env file:"
-        cat backend/config/.env
