@@ -7,10 +7,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      BRANCH_NAME: ${{ github.event.inputs.branch }}
-
     steps:
-    - name: Print branch name
+    - name: Print branch name using GITHUB_REF_NAME
       run: |
-        echo "Branch selected: $BRANCH_NAME"
+        echo "Branch selected: $GITHUB_REF_NAME"
+
+    - name: Save branch name to environment variable
+      run: |
+        echo "BRANCH_NAME=$GITHUB_REF_NAME" >> $GITHUB_ENV
+
+    - name: Create folder and write .env file
+      run: |
+        mkdir -p backend/config
+        echo "BRANCH_NAME=${{ env.BRANCH_NAME }}" > backend/config/.env
+
+    - name: Show .env file (for testing only - remove later)
+      run: cat backend/config/.env
