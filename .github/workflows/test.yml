@@ -1,17 +1,19 @@
 name: Use .env from GitHub Secrets
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: "Choose branch"
+        required: true
+        default: "main" 
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout 
       uses: actions/checkout@v3
 
     - name: Create folder and write .env file
